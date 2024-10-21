@@ -1,6 +1,6 @@
 #include <signal.h>
 #include <unistd.h>
-#include "libft/libft.h"
+#include "Libft/libft/libft.h"
 
 static void	action(int sig, siginfo_t *info, void *context)
 {
