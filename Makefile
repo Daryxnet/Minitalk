@@ -1,32 +1,51 @@
-SOURCES = server.c client.c
-OBJECTS = $(SOURCES:.c=.o)
+# Nombre del ejecutable
+SERVER = server
+CLIENT = client
 
+# Compilador y banderas
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-all: server client
+# Directorios
+LIBFT_DIR = Libft/
+LIBFT = $(LIBFT_DIR)Libftnew.a
 
-bonus: server client
+# Archivos fuente
+SRCS_SERVER = server.c
+SRCS_CLIENT = client.c
 
-server: server.o libft
-	$(CC) -o $@ $< -Llibft -lft
+# Archivos objeto
+OBJS_SERVER = $(SRCS_SERVER:.c=.o)
+OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
 
-client: client.o libft
-	$(CC) -o $@ $< -Llibft -lft
+# Reglas para todo
+all: $(SERVER) $(CLIENT)
 
-%.o: %.c
-	$(CC) -c $(CFLAGS) $?
+# Compilar el servidor
+$(SERVER): $(OBJS_SERVER) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(SERVER) $(OBJS_SERVER) Libft/Libftnew.a
 
-libft:
-	make -C Libft
+# Compilar el cliente
+$(CLIENT): $(OBJS_CLIENT) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(CLIENT) $(OBJS_CLIENT) Libft/Libftnew.a
 
+# Compilar la libft si no existe
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+# Limpiar objetos
 clean:
-	rm -f $(OBJECTS)
-	make -C Libft clean
-	
-fclean: clean
-	rm -f server client Libft/libft/libft.a
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -f $(OBJS_SERVER) $(OBJS_CLIENT)
 
+# Limpiar todo
+fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(SERVER) $(CLIENT)
+
+# Reconstruir todo
 re: fclean all
 
-.PHONY: all bonus libft clean fclean re
+# Evitar que Make interprete los nombres de los archivos como comandos
+.PHONY: all clean fclean re
+
