@@ -10,14 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 
-SERVER = server
+SERVER = server2
 CLIENT = client
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = Libft/
 LIBFT = $(LIBFT_DIR)Libftnew.a
 
-SRCS_SERVER = server.c
+SRCS_SERVER = server2.c
 SRCS_CLIENT = client.c
 
 OBJS_SERVER = $(SRCS_SERVER:.c=.o)
