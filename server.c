@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dagarmil <dagarmil@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 13:27:07 by dagarmil          #+#    #+#             */
-/*   Updated: 2024/10/24 13:27:26 by dagarmil         ###   ########.fr       */
+/*   Created: 2024/11/20 11:10:26 by dagarmil          #+#    #+#             */
+/*   Updated: 2024/11/20 13:24:04 by dagarmil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ static void	action(int sig, siginfo_t *info, void *context)
 		c <<= 1;
 }
 
+static void	handle_exit(int sig)
+{
+	(void)sig;
+	ft_putstr_fd("\nServer shutting down...\n", 1);
+	exit(0);
+}
+
 int	main(void)
 {
 	struct sigaction	s_sigaction;
@@ -48,11 +55,16 @@ int	main(void)
 	ft_putstr_fd("Server PID: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
+
 	s_sigaction.sa_sigaction = action;
 	s_sigaction.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &s_sigaction, 0);
 	sigaction(SIGUSR2, &s_sigaction, 0);
+
+	signal(SIGINT, handle_exit);
+
 	while (1)
 		pause();
 	return (0);
 }
+

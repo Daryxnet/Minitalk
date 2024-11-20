@@ -6,18 +6,18 @@
 #    By: dagarmil <dagarmil@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 13:30:02 by dagarmil          #+#    #+#              #
-#    Updated: 2024/10/24 13:30:06 by dagarmil         ###   ########.fr        #
+#    Updated: 2024/11/20 11:18:27 by dagarmil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SERVER = server2
+SERVER = server
 CLIENT = client
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = Libft/
 LIBFT = $(LIBFT_DIR)Libftnew.a
 
-SRCS_SERVER = server2.c
+SRCS_SERVER = server.c
 SRCS_CLIENT = client.c
 
 OBJS_SERVER = $(SRCS_SERVER:.c=.o)
