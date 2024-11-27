@@ -6,7 +6,7 @@
 /*   By: dagarmil <dagarmil@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:10:26 by dagarmil          #+#    #+#             */
-/*   Updated: 2024/11/20 13:24:04 by dagarmil         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:16:52 by dagarmil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,12 @@ int	main(void)
 	ft_putstr_fd("Server PID: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
-
 	s_sigaction.sa_sigaction = action;
 	s_sigaction.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &s_sigaction, 0);
 	sigaction(SIGUSR2, &s_sigaction, 0);
-
 	signal(SIGINT, handle_exit);
-
 	while (1)
 		pause();
 	return (0);
 }
-
